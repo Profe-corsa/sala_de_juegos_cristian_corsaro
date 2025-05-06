@@ -1,0 +1,21 @@
+<body>
+  <header>
+    <h1>¿Quién Soy?</h1>
+  </header>
+  <main>
+    <p><strong>Nombre:</strong> {{ nombre }}</p>
+    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Imagen personal">
+    <p><strong>Descripción:</strong> {{ descripcion }}</p>
+    <h3>Intereses:</h3>
+    <ul>
+      <li *ngFor="let interes of intereses">{{ interes }}</li>
+    </ul>
+  </main>
+    <footer>
+    <button class="button-bienvenido" routerLink="/bienvenido">Ir a la página de bienvenida</button>
+  </footer>
+</body>
+
+
+
+

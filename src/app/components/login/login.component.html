@@ -1,0 +1,21 @@
+<body>
+    
+  <header>
+    <h1>Portal de Login</h1>
+  </header>
+    <main>
+      <form id="login_form" class="form_class" (ngSubmit)="login()" action="login/login-access.php" method="post">
+        <div class="form_div">
+          <label >Correo:</label>
+          <input id="usuario" [(ngModel)]="usuario.correo" class="field-class" name="correo" type="email" />
+
+          <label >Clave:</label>
+          <input id="clave" class="field-class" [(ngModel)]="usuario.clave" name="clave" type="password" />
+          <button class="button-class" (click)="login()">Iniciar Sesión</button>
+          <button class="button-class" (click)="cargarUsuario('joseperez@email.com','123456')">Usuario
+            cargado</button>
+        </div>
+      </form>
+    </main>
+    <footer></footer>
+</body>

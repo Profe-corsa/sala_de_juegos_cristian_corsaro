@@ -1,0 +1,95 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  background-color: lightgreen;
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+    header, footer {
+    text-align: center;
+  }
+
+  main {
+    flex: 1; 
+  }
+}
+header {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.3);
+}
+h1 {
+  letter-spacing: 1.5vw;
+  font-family: "system-ui";
+  text-transform: uppercase;
+  text-align: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;   
+  padding: 1rem; 
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  width: 100%;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Mountains-1412683.svg/1280px-Mountains-1412683.svg.png)
+    no-repeat center center;
+  background-size: cover;
+
+    text-align: center;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+
+  
+  h1 {
+    color: #2c3e50;
+  }
+  h3 {
+    color: #2c3e50;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #34495e;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    font-size: 16px;
+    color: #b96029;
+  }
+}
+
+footer {
+  height: 10vh;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -5px -5px 10px rgb(0, 0, 0, 0.3);
+      button{
+  border-radius: 5px;
+  background-color: #ffe6d4;
+  padding: 8px 20px;
+  font-family: "system-ui";
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.2);
+  cursor: pointer;
+    }
+}
