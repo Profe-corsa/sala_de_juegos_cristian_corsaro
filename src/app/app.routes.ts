@@ -24,11 +24,17 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'registro',
+    loadComponent: () =>
+      import('./components/registro/registro.component').then(
+        (m) => m.RegistroComponent
+      ),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/error/error.component').then(
         (m) => m.ErrorComponent
-        
       ),
   },
 ];

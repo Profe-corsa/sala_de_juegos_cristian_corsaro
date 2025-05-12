@@ -2,9 +2,13 @@
     
   <header>
     <h1>Portal de Login</h1>
+    <nav>
+      <button (click)="registrar()">Registrarse</button>
+      <button (click)="saludar()">Ir a Bienvenido</button>
+    </nav>
   </header>
     <main>
-      <form id="login_form" class="form_class" (ngSubmit)="login()" action="login/login-access.php" method="post">
+      <form id="login_form" class="form_class" action="login/login-access.php" method="post">
         <div class="form_div">
           <label >Correo:</label>
           <input id="usuario" [(ngModel)]="usuario.correo" class="field-class" name="correo" type="email" />

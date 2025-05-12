@@ -3,6 +3,7 @@ import { Usuario } from '../../classes/usuario';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { supabase } from '../../services/supabase.service';
+import { AuthService } from '../../services/auth.service'
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 
@@ -16,25 +17,25 @@ export class LoginComponent {
   public usuario: Usuario;
   error = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
     this.usuario = new Usuario();
   }
 
   async login() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: this.usuario.correo,
-      password: this.usuario.clave,
-    });
+    const error = await this.auth.login(
+      this.usuario.correo,
+      this.usuario.clave
+    );
 
-    if (error) {
-      this.error = error.message;
+    if (!error) {
+      //this.error = error.message;
       Swal.fire({
-        title: 'Error',
+        title: 'Error al iniciar sesión',
         icon: 'error',
         text: 'Usuario o contraseña incorrecta',
-      })
+      });
     } else {
-      this.router.navigate(['/bienvenido']); 
+      this.router.navigate(['/bienvenido']);
     }
   }
 
@@ -47,5 +48,14 @@ export class LoginComponent {
   limpiar(): void {
     this.usuario.correo = '';
     this.usuario.clave = '';
+  }
+
+  saludar() {
+    this.limpiar();
+    this.router.navigate(['/bienvenido']);
+  }
+  registrar() {
+    this.limpiar();
+    this.router.navigate(['/registro']);
   }
 }

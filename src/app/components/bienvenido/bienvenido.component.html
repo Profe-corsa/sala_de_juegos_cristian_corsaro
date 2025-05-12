@@ -1,9 +1,21 @@
 <body>
   <header>
-    <h1>Bienvenido</h1>
+    <h1>Bienvenido a la sala de juegos</h1>
   </header>
   <main>
-    <p>Sala de juegos</p>
+    <div *ngIf="auth.usuarioLogueado; else noLogueado">
+      <p>Bienvenido, {{ usuario.correo }}</p>
+      <button (click)="logout()">Cerrar sesión</button>
+    </div>
+    
+    <ng-template #noLogueado>
+      <button routerLink="/login">Login</button>
+      <button routerLink="/registro">Registro</button>
+    </ng-template>
+    
+    <div class="juegos">
+      <app-card-juego titulo="Juego 1 (próximamente)"></app-card-juego>
+    </div>
   </main>
   <footer> <button class="button-quien-soy" routerLink="/quien-soy">Quien soy</button></footer>
 </body>

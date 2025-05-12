@@ -1,7 +1,4 @@
-* {
-  padding: 0px;
-  margin: 0px;
-}
+
 body {
   background-color: lightgreen;
     display: flex;
@@ -15,21 +12,8 @@ body {
     flex: 1; 
   }
 }
-header {
-  background-color: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 15vh;
-  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.3);
-}
-h1 {
-  letter-spacing: 1.5vw;
-  font-family: "system-ui";
-  text-transform: uppercase;
-  text-align: center;
-}
+
+
 main {
   display: flex;
   flex-direction: column;
