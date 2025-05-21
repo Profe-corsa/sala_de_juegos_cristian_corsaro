@@ -20,17 +20,12 @@ export class RegistroComponent {
   }
 
   async register() {
-    const error = await this.auth.registro(
-      this.usuario.correo,
-      this.usuario.clave
-    );
-
-    if (!error) {
-      //this.error = error.message;
+    const mensajeError = await this.auth.registro(this.usuario.correo, this.usuario.clave);
+    if (mensajeError) {
       Swal.fire({
-        title: 'Error al intentar registrarse',
         icon: 'error',
-        text: 'Faltan datos o ya estás registrado',
+        title: 'Error de registro',
+        text: mensajeError,
       });
     }
 
