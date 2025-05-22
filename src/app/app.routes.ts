@@ -31,6 +31,10 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'juegos',
+    loadChildren: () => import('./juegos/juegos.module').then(m => m.JuegosModule)
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/error/error.component').then(

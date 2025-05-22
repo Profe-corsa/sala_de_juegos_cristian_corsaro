@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../classes/usuario';
 import { CommonModule } from '@angular/common';
-import { CardJuegoComponent } from "../card-juego/card-juego.component";
 import { AuthService } from '../../services/auth.service';
+import { ChatComponent } from "../chat/chat.component";
+import { JuegosModule } from '../../juegos/juegos.module';
 
 @Component({
   selector: 'app-bienvenido',
-  imports: [RouterLink, CommonModule, CardJuegoComponent],
+  imports: [RouterLink, CommonModule, ChatComponent, JuegosModule],
   templateUrl: './bienvenido.component.html',
   styleUrl: './bienvenido.component.scss',
 })

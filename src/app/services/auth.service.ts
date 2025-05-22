@@ -27,7 +27,6 @@ export class AuthService {
   }
 
   async login(email: string, password: string): Promise<boolean> {
-
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email,
       password,
@@ -74,5 +73,9 @@ export class AuthService {
 
   getUsuarioActual() {
     return this.usuarioSubject.value;
+  }
+
+  getUsuarioActualEmail(): string {
+    return this.usuarioSubject.value?.email ?? 'Desconocido';
   }
 }
