@@ -4,8 +4,10 @@ import { Component } from '@angular/core';
   selector: 'app-ahorcado',
   templateUrl: './ahorcado.component.html',
   styleUrl: './ahorcado.component.scss',
-  standalone: false
+  standalone: false,
 })
 export class AhorcadoComponent {
-
+  constructor(){
+    
+  }
 }
