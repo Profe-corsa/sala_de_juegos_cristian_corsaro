@@ -1,0 +1,14 @@
+.juegos-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .juego-card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    background: #f9f9f9;
+    cursor: pointer;
+  }

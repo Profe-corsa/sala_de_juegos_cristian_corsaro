@@ -1,0 +1,22 @@
+<div class="chat-container">
+    <h3>💬 Sala de Chat</h3>
+    <div class="mensajes">
+      <div *ngFor="let m of mensajes" class="mensaje">
+        <div class="encabezado">
+          <strong>{{ m.usuario }}</strong> <span>{{ m.fecha }}</span>
+        </div>
+        <div class="contenido">{{ m.mensaje }}</div>
+      </div>
+    </div>
+  
+    <div class="formulario">
+      <input
+        [(ngModel)]="nuevoMensaje"
+        type="text"
+        placeholder="Escribí tu mensaje"
+        (keyup.enter)="enviarMensaje()"
+      />
+      <button (click)="enviarMensaje()">Enviar</button>
+    </div>
+  </div>
+  
