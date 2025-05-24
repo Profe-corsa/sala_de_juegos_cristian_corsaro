@@ -22,20 +22,13 @@ export class LoginComponent {
   }
 
   async login() {
-    const error = await this.auth.login(
-      this.usuario.correo,
-      this.usuario.clave
-    );
-
-    if (!error) {
-      //this.error = error.message;
+    const mensajeError = await this.auth.login(this.usuario.correo, this.usuario.clave);
+    if (mensajeError) {
       Swal.fire({
-        title: 'Error al iniciar sesión',
         icon: 'error',
-        text: 'Usuario o contraseña incorrecta',
+        title: 'Error de inicio de sesión',
+        text: mensajeError,
       });
-    } else {
-      this.router.navigate(['/bienvenido']);
     }
   }
 

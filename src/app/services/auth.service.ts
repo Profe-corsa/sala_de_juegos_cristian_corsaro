@@ -31,7 +31,18 @@ export class AuthService {
       email,
       password,
     });
-    if (error) return false;
+
+    if (error) {
+      if (error.message.includes('Invalid login credentials')) {
+        return 'Correo o contraseña incorrectos';
+      } else if (error.message.includes('Email not confirmed')) {
+        return 'Debes confirmar tu email antes de iniciar sesión';
+      }else if (error.message.includes('Password should be at least 6 characters')){
+        return 'La contraseña debe tener al menos 6 caracteres';
+      }
+        return 'Error al iniciar sesión. Intente más tarde.';
+    }
+  
 
     const user = data.user;
     this.usuarioSubject.next(user);
@@ -42,25 +53,36 @@ export class AuthService {
     });
     this.usuarioLogueado = true;
     this.router.navigate(['/bienvenido']);
-    return true;
+    return null;
   }
 
-  async registro(email: string, password: string): Promise<boolean> {
+  async registro(email: string, password: string): Promise<string|null> {
     const { data, error } = await this.supabase.auth.signUp({
       email,
       password,
     });
-    if (error || !data.user) return false;
+    if (error) {
+      if (error.message.includes('User already registered')) {
+        return 'El correo ya está registrado';
+      } else if (error.message.includes('Invalid email')) {
+        return 'El correo ingresado no es válido';
+      } else if (
+        error.message.includes('Password should be at least 6 characters')
+      ) {
+        return 'La contraseña debe tener al menos 6 caracteres';
+      }
+      return 'Error al registrar usuario';
+    }
 
     const user = data.user;
     this.usuarioSubject.next(user);
     localStorage.setItem('usuario', JSON.stringify(user));
     await this.supabase.from('logs_ingreso').insert({
-      email: user.email,
+      email: user!.email,
     });
     this.usuarioLogueado = true;
     this.router.navigate(['/bienvenido']);
-    return true;
+    return null;
   }
 
   logout() {
