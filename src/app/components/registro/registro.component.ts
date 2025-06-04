@@ -61,9 +61,9 @@ export class RegistroComponent {
 
     if (!error) {
       Swal.fire({
-        title: 'Error al intentar registrarse',
         icon: 'error',
-        text: 'Faltan datos o ya estás registrado',
+        title: 'Error de registro',
+        text: mensajeError,
       });
     }
   }
