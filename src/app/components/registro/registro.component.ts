@@ -63,7 +63,7 @@ export class RegistroComponent {
       Swal.fire({
         icon: 'error',
         title: 'Error de registro',
-        text: mensajeError,
+        text: 'No se pudo registrar el usuario',
       });
     }
   }
