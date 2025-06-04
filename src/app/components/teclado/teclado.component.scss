@@ -1,0 +1,9 @@
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 0.5rem;
+  }
+  button {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }

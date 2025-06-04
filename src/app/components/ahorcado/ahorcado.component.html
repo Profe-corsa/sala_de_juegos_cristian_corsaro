@@ -1,1 +1,15 @@
-<p>ahorcado works!</p>
+<div class="hangman-container">
+  <div class="figura">  
+    <app-figura [incorrectGuesses]="incorrectGuesses"></app-figura>
+  </div>
+    <app-mostrar-palabra [secretWord]="secretWord" [guessedLetters]="guessedLetters"></app-mostrar-palabra>
+    <app-teclado (letterSelected)="onLetterSelected($event)" [guessedLetters]="guessedLetters"></app-teclado>
+    <app-estado-juego 
+      *ngIf="isGameWon() || isGameOver()" 
+      [isWon]="isGameWon()" 
+      (restart)="restartGame()">
+    </app-estado-juego>
+    <button class="boton-flotante" (click)="volverABienvenido()">
+      ⬅ Volver
+    </button>
+  </div>

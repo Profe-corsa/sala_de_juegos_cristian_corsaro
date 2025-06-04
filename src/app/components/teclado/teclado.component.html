@@ -1,1 +1,7 @@
-<p>teclado works!</p>
+<div class="keyboard">
+    <button *ngFor="let letter of letters" 
+            [disabled]="guessedLetters.includes(letter)"
+            (click)="selectLetter(letter)">
+      {{ letter }}
+    </button>
+  </div>
