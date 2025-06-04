@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-figura',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './figura.component.html',
-  styleUrl: './figura.component.scss'
+  styleUrl: './figura.component.scss',
 })
 export class FiguraComponent {
-
+  @Input() incorrectGuesses: number = 0;
 }

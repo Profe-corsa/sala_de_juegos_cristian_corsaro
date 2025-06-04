@@ -3,7 +3,7 @@
     <div class="mensajes">
       <div *ngFor="let m of mensajes" class="mensaje">
         <div class="encabezado">
-          <strong>{{ m.usuario }}</strong> <span>{{ m.fecha }}</span>
+          <strong>{{ m.usuario }}</strong> <span>{{ m.fecha | date: 'dd/MM/yyyy HH:mm'}}</span>
         </div>
         <div class="contenido">{{ m.mensaje }}</div>
       </div>

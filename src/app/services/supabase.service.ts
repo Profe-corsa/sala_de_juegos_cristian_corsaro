@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { BehaviorSubject } from 'rxjs';
+
+interface Mensaje {
+  id?: number;
+  usuario: string;
+  mensaje: string;
+  fecha: Date;
+}
 
 const supabaseUrl = 'https://sqfrmlidtnchlchkuhtx.supabase.co';
 const supabaseKey =
@@ -11,9 +19,31 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 })
 export class SupabaseService {
   private supabase: SupabaseClient;
+  private mensajesSubject = new BehaviorSubject<Mensaje[]>([]);
+  mensajes$ = this.mensajesSubject.asObservable();
 
   constructor() {
     this.supabase = createClient(supabaseUrl, supabaseKey);
+    this.inicializarMensajes();
+  }
+
+  private async inicializarMensajes() {
+    const mensajes = await this.traerMensajes();
+    this.mensajesSubject.next(mensajes);
+
+    // Escuchar nuevos mensajes solo una vez
+    this.supabase
+      .channel('mensajes-canal')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'mensajes' },
+        (payload) => {
+          const nuevo = payload.new as Mensaje;
+          const actual = this.mensajesSubject.value;
+          this.mensajesSubject.next([...actual, nuevo]);
+        }
+      )
+      .subscribe();
   }
 
   async guardarMensaje(mensaje: {
@@ -28,7 +58,7 @@ export class SupabaseService {
     }
   }
 
-  async traerMensajes(): Promise<any[]> {
+  private async traerMensajes(): Promise<Mensaje[]> {
     const { data, error } = await this.supabase
       .from('mensajes')
       .select('*')
@@ -42,14 +72,14 @@ export class SupabaseService {
     return data || [];
   }
 
-  escucharNuevosMensajes(callback: (mensaje: any) => void) {
+  escucharNuevosMensajes() {
     this.supabase
       .channel('mensajes-canal')
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'mensajes' },
-        (payload) => {
-          callback(payload.new);
+        () => {
+          this.obtenerMensajes(); // Re-carga actualizada
         }
       )
       .subscribe();
@@ -60,15 +90,25 @@ export class SupabaseService {
       {
         mensaje: mensaje,
         usuario: usuario,
-        fecha: new Date().toISOString(),
+        fecha: new Date().toLocaleString('sv-SE'),
       },
     ]);
-
-    if (error) {
-      console.error('Error al insertar mensaje:', error);
-      return null;
-    }
-
-    return data;
+    if (error) console.error('Error al insertar mensaje:', error);
   }
+
+  async obtenerMensajes() {
+    const { data, error } = await this.supabase
+      .from('mensajes')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (!error && data) {
+      this.mensajesSubject.next(data);
+    }
+  }
+  /*
+  formatearFecha(fecha: string) {
+    return this.datePipe.transform(fecha, 'dd/MM/yyyy HH:mm');
+  }
+    */
 }

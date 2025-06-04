@@ -1,1 +1,5 @@
-<p>mostrar-palabra works!</p>
+<div class="word-display">
+    <span *ngFor="let letter of secretWord.split('')">
+      {{ guessedLetters.includes(letter) ? letter : '_' }}
+    </span>
+  </div>

@@ -1,1 +1,18 @@
-<p>mayor-menor works!</p>
+<div *ngIf="loading">Cargando cartas...</div>
+
+<div class="game-container" *ngIf="!loading && currentCard && nextCard">
+  <h2>Puntaje: {{ score }}</h2>
+  <h3>Intentos restantes: {{ attempts }}</h3>
+  <img [src]="currentCard.image" alt="Carta actual" class="carta"/>
+  <div *ngIf="!gameOver">
+    <button class="actions" (click)="makeGuess(true)">Mayor</button>
+    <button class="actions" (click)="makeGuess(false)">Menor</button>
+  </div>
+  <div class="mensaje" *ngIf="gameOver">
+    <p>Juego terminado 😢</p>
+    <button class="actions" (click)="startGame()">Jugar de nuevo</button>
+  </div>
+  <button class="boton-flotante" (click)="volverABienvenido()">
+    ⬅ Volver
+  </button>
+</div>

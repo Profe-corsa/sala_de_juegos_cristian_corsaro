@@ -1,1 +1,11 @@
-<p>figura works!</p>
+<div class="hangman-figure">
+    <container-element [ngSwitch]="incorrectGuesses">
+        <ng-container *ngSwitchCase=0><img [src]="'./../assets/6' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchCase=1><img [src]="'./../assets/5' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchCase=2><img [src]="'./../assets/4' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchCase=3><img [src]="'./../assets/3' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchCase=4><img [src]="'./../assets/2' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchCase=5><img [src]="'./../assets/1' + '.png'" alt="figura del ahorcado"></ng-container>
+        <ng-container *ngSwitchDefault><img [src]="'./../assets/0.png'" alt="figura del ahorcado"></ng-container>
+    </container-element>
+</div>

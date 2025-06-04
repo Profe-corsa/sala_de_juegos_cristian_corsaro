@@ -9,7 +9,7 @@ interface Mensaje {
   id?: number;
   usuario: string;
   mensaje: string;
-  fecha: string;
+  fecha: Date;
 }
 
 @Component({
@@ -23,23 +23,28 @@ export class ChatComponent implements OnInit {
   nuevoMensaje: string = '';
   usuario: string = '';
 
-  constructor(private auth: AuthService, private supabase: SupabaseService) {}
+  constructor(
+    private auth: AuthService,
+    private supabase: SupabaseService,
+  ) {}
 
   async ngOnInit() {
-    const user = this.auth.getUsuarioActualEmail(); // Devuelve el nombre del usuario
+    const user = this.auth.getUsuarioActualEmail();
     if (user) {
       this.usuario = user;
-      this.obtenerMensajes();
-      this.supabase.escucharNuevosMensajes((mensaje: Mensaje) => {
-        this.mensajes.push(mensaje);
+
+      this.supabase.mensajes$.subscribe((mensajes) => {
+        this.mensajes = mensajes.map((m) => {
+          const fechaConvertida = new Date(m.fecha);
+          return {
+            ...m,
+            fecha: fechaConvertida,
+          };
+        });
       });
     }
   }
 
-  async obtenerMensajes() {
-    const data = await this.supabase.traerMensajes();
-    if (data) this.mensajes = data;
-  }
 
   async enviarMensaje() {
     if (!this.nuevoMensaje.trim()) return;
@@ -49,6 +54,8 @@ export class ChatComponent implements OnInit {
     await this.supabase.enviarMensaje(this.nuevoMensaje, usuario);
 
     this.nuevoMensaje = '';
-    await this.obtenerMensajes(); // Si estás refrescando la lista así
+
   }
+
+
 }

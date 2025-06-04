@@ -1,26 +1,34 @@
-<body>
-    
-    <header>
-      <h1>Portal de registro</h1>
-      <nav>
-        <button (click)="iniciar()">Iniciar sesión</button>
-        <button (click)="saludar()">Ir a Bienvenido</button>
-      </nav>
-    </header>
-      <main>
-        <form id="login_form" class="form_class" action="login/login-access.php" method="post">
-          <div class="form_div">
-            <label >Correo:</label>
-            <input id="usuarioCorreo" [(ngModel)]="usuario.correo" class="field-class" name="correo" type="email" />
-            <label >Nombre:</label>
-            <input id="usuarioNombre" [(ngModel)]="usuario.nombre" class="field-class" name="nombre" type="text" />
-            <label >Apellido:</label>
-            <input id="usuarioApellido" [(ngModel)]="usuario.apellido" class="field-class" name="apellido" type="text" />
-            <label >Clave:</label>
-            <input id="clave" class="field-class" [(ngModel)]="usuario.clave" name="clave" type="password" />
-            <button class="button-class" (click)="register()">Registrar usuario</button>
-          </div>
-        </form>
-      </main>
-      <footer></footer>
-  </body>
+
+
+<header>
+  <h1>Portal de registro</h1>
+  <nav>
+    <button (click)="iniciar()">Iniciar sesión</button>
+    <button (click)="saludar()">Ir a Bienvenido</button>
+  </nav>
+</header>
+
+<main>
+  <form [formGroup]="registroForm" (ngSubmit)="register()" class="form_class">
+    <div class="form_div">
+      <label>Correo:</label>
+      <input type="email" formControlName="correo" class="field-class" />
+      <div *ngIf="correo.touched && correo.invalid" class="error">
+        <small *ngIf="correo.errors?.['required']">El correo es obligatorio.</small>
+        <small *ngIf="correo.errors?.['email']">Formato de correo inválido.</small>
+      </div>
+      <label>Nombre:</label>
+      <input type="text" formControlName="nombre" class="field-class" />
+
+      <label>Apellido:</label>
+      <input type="text" formControlName="apellido" class="field-class" />
+
+      <label>Clave:</label>
+      <input type="password" formControlName="clave" class="field-class" />
+
+      <button class="button-class" type="submit">Registrar usuario</button>
+    </div>
+  </form>
+</main>
+
+<footer></footer>
