@@ -26,7 +26,7 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<boolean> {
+  async login(email: string, password: string): Promise<string| null> {
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email,
       password,

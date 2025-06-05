@@ -59,11 +59,11 @@ export class RegistroComponent {
 
     const error = await this.auth.registro(correo, clave);
 
-    if (!error) {
+    if (error) {
       Swal.fire({
         icon: 'error',
         title: 'Error de registro',
-        text: 'No se pudo registrar el usuario',
+        text: error,
       });
     }
   }
