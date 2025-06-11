@@ -11,10 +11,12 @@ import { MostrarPalabraComponent } from '../components/mostrar-palabra/mostrar-p
 import { TecladoComponent } from '../components/teclado/teclado.component';
 import { EstadoJuegoComponent } from '../components/estado-juego/estado-juego.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PreguntadosComponent } from '../components/preguntados/preguntados.component';
+import { BatallaNavalComponent } from '../components/batalla-naval/batalla-naval.component';
 
 
 @NgModule({
-  declarations: [JuegosComponent, AhorcadoComponent, MayorMenorComponent],
+  declarations: [JuegosComponent, AhorcadoComponent, MayorMenorComponent, PreguntadosComponent, BatallaNavalComponent],
   imports: [
     CommonModule,
     FormsModule,

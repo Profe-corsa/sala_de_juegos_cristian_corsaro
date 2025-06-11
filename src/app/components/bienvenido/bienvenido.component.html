@@ -12,15 +12,15 @@
     <div *ngIf="auth.usuarioLogueado; else noLogueado">
 
 
-          <section class="chat-container">
-            <app-chat></app-chat>
-          </section>
-        </div>
+      <section class="chat-container">
+        <app-chat></app-chat>
+      </section>
+    </div>
     <ng-template #noLogueado>
       <button routerLink="/login">Login</button>
       <button routerLink="/registro">Registro</button>
     </ng-template>
-    
+
     <div class="juegos">
       <app-juegos></app-juegos>
     </div>

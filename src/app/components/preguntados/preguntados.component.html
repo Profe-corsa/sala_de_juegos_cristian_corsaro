@@ -1,0 +1,28 @@
+<div class="game-container">
+    <h1>Preguntados</h1>
+  
+    <div *ngIf="!juegoTerminado && preguntaActual">
+      <p>Intentos restantes: {{ intentosRestantes }}</p>
+      <p>Puntaje: {{ puntaje }}</p>
+  
+      <h2>¿De qué país es esta bandera?</h2>
+      <img [src]="preguntaActual.bandera" alt="Bandera" class="bandera" />
+  
+      <div *ngFor="let opcion of preguntaActual.opciones">
+        <button (click)="seleccionarRespuesta(opcion)">
+          {{ opcion }}
+        </button>
+      </div>
+    </div>
+  
+    <div *ngIf="juegoTerminado">
+      <h2>¡Juego terminado!</h2>
+      <p>Puntaje final: {{ puntaje }}</p>
+      <button (click)="reiniciarJuego()">Reiniciar</button>
+    </div>
+  
+    <button class="boton-flotante" (click)="volverABienvenido()">
+      ⬅ Volver
+    </button>
+  </div>
+  
