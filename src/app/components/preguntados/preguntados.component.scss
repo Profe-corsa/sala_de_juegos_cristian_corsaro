@@ -1,0 +1,52 @@
+.game-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  .bandera {
+    width: 50vw;
+    height: auto;
+    max-width: 300px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    display: block;
+    margin: 20px auto;
+  }
+  .options button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ffe6d4;
+    color: black;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: rosybrown;
+  }
+  
+  button:disabled {
+    background-color: #0056b3;
+    cursor: not-allowed;
+  }
+  
+
+  .boton-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffe6d4;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+  }
+  
+  .boton-flotante:hover {
+    background-color: #ffe6d4;
+  }

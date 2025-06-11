@@ -1,0 +1,38 @@
+<div class="contenedor">
+    <h3>Batalla Naval</h3>
+  
+ <!-- Encabezado con letras -->
+<div class="encabezado-horizontal">
+    <span class="coordenada-vacia"></span>
+    <span class="coordenada-horizontal" *ngFor="let letra of letras">{{ letra }}</span>
+  </div>
+  
+  <!-- Tablero con coordenadas verticales -->
+  <div class="tablero">
+    <ng-container *ngFor="let fila of tablero; let i = index">
+      <span class="coordenada-vertical">{{ i + 1 }}</span>
+      <button
+        class="celda"
+        *ngFor="let celda of fila; let j = index"
+        (click)="seleccionarCasilla(i, j)"
+        [ngClass]="{
+          'barco-tocado': celda === 'X',
+          'agua': celda === 'O',
+          'barco-revelado': celda === 'R'
+        }"
+      >
+        {{ celda === 'X' ? '💥' : celda === 'O' ? '💧' : celda === 'R' ? '🚢' : '' }}
+      </button>
+    </ng-container>
+  </div>
+    <label class="mensaje" [style.color]="colorMensaje">{{ mensaje }}</label>
+    <div class="intentos-restantes">
+        Intentos restantes: {{ maximosIntentosFallidos - intentosFallidos }}
+      </div>
+    <button id="boton-reiniciar" (click)="inicializarTablero()">Reiniciar juego</button>
+
+    <button class="boton-flotante" (click)="volverABienvenido()">
+        ⬅ Volver
+      </button>
+  </div>
+  

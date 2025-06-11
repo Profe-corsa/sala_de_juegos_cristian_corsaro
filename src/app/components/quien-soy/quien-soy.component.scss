@@ -1,79 +1,90 @@
-
 body {
-  background-color: lightgreen;
-    display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
   flex-direction: column;
-  min-height: 100vh;
-    header, footer {
-    text-align: center;
-  }
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to bottom right, #a8e6cf, #8ab448);
+  overflow: hidden;
+}
 
-  main {
-    flex: 1; 
+header {
+  flex: 0 0 auto;
+  background-color: rgba(1, 1, 1, 0.9);
+  padding: 0.5rem;
+  text-align: center;
+  //box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #ffe6d4;
   }
 }
 
-
 main {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0.5rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;   
-  padding: 1rem; 
   align-items: center;
-  justify-content: center;
-  height: 75vh;
-  width: 100%;
-  background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Mountains-1412683.svg/1280px-Mountains-1412683.svg.png)
+  text-align: center;
+  background: 
+    linear-gradient(#a8e6cf, #8ab448),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Mountains-1412683.svg/1280px-Mountains-1412683.svg.png') 
     no-repeat center center;
   background-size: cover;
 
-    text-align: center;
-    margin: 20px;
-    font-family: Arial, sans-serif;
-
-  
-  h1 {
-    color: #2c3e50;
-  }
-  h3 {
-    color: #2c3e50;
-  }
-  
-  p {
-    font-size: 18px;
+  p, li {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
     color: #34495e;
   }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
+
+  h3 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #2c3e50;
   }
-  
-  li {
-    font-size: 16px;
-    color: #b96029;
+
+  ul {
+    padding: 0;
+    margin: 0.3rem 0;
+    list-style: none;
+  }
+
+  img {
+    max-height: 120px;
+    max-width: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0.5rem 0;
+    border: 2px solid #2c3e50;
   }
 }
 
 footer {
-  height: 10vh;
-  background-color: black;
+  flex: 0 0 auto;
+  background-color: #222;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: -5px -5px 10px rgb(0, 0, 0, 0.3);
-      button{
-  border-radius: 5px;
-  background-color: #ffe6d4;
-  padding: 8px 20px;
-  font-family: "system-ui";
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  display: block;
-  margin: auto;
-  margin-top: 10px;
-  box-shadow: 2px 2px 5px rgb(0, 0, 0, 0.2);
-  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem;
+  box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.3);
+
+  button {
+    background-color: #ffe6d4;
+    padding: 0.5rem 1rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #ffd4ad;
     }
+  }
 }

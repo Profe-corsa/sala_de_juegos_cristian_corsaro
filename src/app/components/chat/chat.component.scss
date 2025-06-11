@@ -25,24 +25,44 @@
   .mensajes {
     height: 300px;
     overflow-y: auto;
-    border: 1px solid #ddd;
     padding: 0.5rem;
-    background: white;
-    border-radius: 8px;
   }
-  
-  .mensaje {
-    margin-bottom: 0.75rem;
-    padding: 0.5rem;
-    background: #e7f3ff;
-    border-radius: 6px;
-  }
-  
-  .encabezado {
-    font-size: 0.85rem;
-    color: #555;
+  .mensaje-wrapper {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+  }
+
+  .wrapper-propio {
+    justify-content: flex-end; /* A la derecha */
+  }
+  
+  .wrapper-otro {
+    justify-content: flex-start; /* A la izquierda */
+  }
+  .mensaje {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mensaje-propio {
+    border-top-right-radius: 0;
+    background-color: #cce5ff; /* celeste claro */
+    text-align: right;
+  }
+
+  .mensaje-otro {
+    border-top-left-radius: 0;
+    background-color: #f8d7da; /* rosa claro */
+    text-align: left;
+  }
+  .encabezado {
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+    color: #444;
   }
   
   .contenido {
@@ -52,6 +72,7 @@
   .formulario {
     display: flex;
     gap: 0.5rem;
+    border-top: 1px solid #ccc;
   }
   
   input {
