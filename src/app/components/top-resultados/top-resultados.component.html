@@ -1,0 +1,26 @@
+<div *ngFor="let juego of juegos" class="juego-tabla">
+    <h2>{{ juego | titlecase }}</h2>
+    <table class="tabla-resultados">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Email</th>
+          <th>Puntaje</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resultado of topPorJuego[juego]; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ resultado.email }}</td>
+          <td>{{ resultado.puntaje }}</td>
+          <td>{{ resultado.fecha  }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="boton-flotante" (click)="volverABienvenido()">
+    ⬅ Volver
+  </button>
+  

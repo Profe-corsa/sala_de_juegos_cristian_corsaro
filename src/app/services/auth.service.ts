@@ -26,7 +26,7 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string): Promise<string| null> {
+  async login(email: string, password: string): Promise<string | null> {
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email,
       password,
@@ -37,12 +37,13 @@ export class AuthService {
         return 'Correo o contraseña incorrectos';
       } else if (error.message.includes('Email not confirmed')) {
         return 'Debes confirmar tu email antes de iniciar sesión';
-      }else if (error.message.includes('Password should be at least 6 characters')){
+      } else if (
+        error.message.includes('Password should be at least 6 characters')
+      ) {
         return 'La contraseña debe tener al menos 6 caracteres';
       }
-        return 'Error al iniciar sesión. Intente más tarde.';
+      return 'Error al iniciar sesión. Intente más tarde.';
     }
-  
 
     const user = data.user;
     this.usuarioSubject.next(user);
@@ -56,11 +57,12 @@ export class AuthService {
     return null;
   }
 
-  async registro(email: string, password: string): Promise<string|null> {
+  async registro(email: string, password: string): Promise<string | null> {
     const { data, error } = await this.supabase.auth.signUp({
       email,
       password,
     });
+
     if (error) {
       if (error.message.includes('User already registered')) {
         return 'El correo ya está registrado';
@@ -75,11 +77,29 @@ export class AuthService {
     }
 
     const user = data.user;
+
+    if (!user) return 'Error al obtener datos del usuario';
+
+    // ✔ Guarda en tabla usuarios
+    const { error: insertError } = await this.supabase.from('usuarios').insert({
+      id: user.id,
+      email: user.email,
+      password: password,
+    });
+
+    if (insertError) {
+      console.error('Error al insertar en tabla usuarios:', insertError);
+      return 'Error al guardar el usuario en base de datos';
+    }
+
+    // ✔ Guarda en logs de ingreso
+    await this.supabase.from('logs_ingreso').insert({
+      email: user.email,
+    });
+
+    // ✔ Manejo de sesión
     this.usuarioSubject.next(user);
     localStorage.setItem('usuario', JSON.stringify(user));
-    await this.supabase.from('logs_ingreso').insert({
-      email: user!.email,
-    });
     this.usuarioLogueado = true;
     this.router.navigate(['/bienvenido']);
     return null;
@@ -94,6 +114,7 @@ export class AuthService {
   }
 
   getUsuarioActual() {
+    console.log('usuraio actual:', this.usuarioSubject.value);
     return this.usuarioSubject.value;
   }
 
@@ -123,5 +144,64 @@ export class AuthService {
     const minutos = String(ahora.getMinutes()).padStart(2, '0');
 
     return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+  }
+
+  async guardarEncuesta(encuestaData: any) {
+    const { data, error } = await this.supabase
+      .from('encuestas')
+      .insert(encuestaData);
+
+    if (error) {
+      console.error('Error al guardar la encuesta:', error);
+      throw error;
+    }
+
+    return data;
+  }
+
+  async obtenerRolDeUsuario(userId: string): Promise<string | null> {
+    const { data, error } = await this.supabase
+      .from('roles')
+      .select('nombre')
+      .eq('usuario_id', userId)
+      .single();
+
+    if (error || !data) {
+      return null;
+    }
+
+    return data.nombre;
+  }
+
+  async obtenerTodasLasEncuestas(): Promise<any[]> {
+    const { data, error } = await this.supabase
+      .from('encuestas')
+      .select('*')
+      .order('fecha_creacion', { ascending: false });
+
+    if (error) {
+      console.error('Error al obtener encuestas:', error);
+      throw error;
+    }
+
+    return data || [];
+  }
+
+  async usuarioEsAdmin(): Promise<boolean> {
+    const user = await this.getUsuarioActual();
+    if (!user) return false;
+
+    const { data, error } = await this.supabase
+      .from('roles')
+      .select('nombre')
+      .eq('usuario_id', user.id)
+      .single();
+
+    if (error) {
+      console.error('Error al verificar rol de usuario:', error.message);
+      return false;
+    }
+
+    return data?.nombre === 'admin';
   }
 }

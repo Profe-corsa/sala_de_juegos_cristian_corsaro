@@ -24,6 +24,14 @@
     <div class="juegos">
       <app-juegos></app-juegos>
     </div>
+
+    <div class="info">
+      <button routerLink="/encuestas">Encuestas</button>
+      <button routerLink="/top-resultados">Ir al top 5</button>
+      <button *ngIf="esAdmin" routerLink="/encuestas-respuestas" class="btn-admin">
+        Ver respuestas de encuestas
+      </button>
+    </div>
   </main>
   <footer> <button class="button-quien-soy" routerLink="/quien-soy">Quien soy</button></footer>
 </body>

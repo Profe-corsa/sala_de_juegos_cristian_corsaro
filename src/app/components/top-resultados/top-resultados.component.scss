@@ -1,0 +1,44 @@
+.juego-tabla {
+    margin: 2rem 0;
+  }
+  
+  .tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fefefe;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+  
+    thead {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+  
+    tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+  
+  .boton-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffe6d4;
+    color: black;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+  }
+  
+  .boton-flotante:hover {
+    background-color: #ffe6d4;
+  }
