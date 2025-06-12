@@ -1,0 +1,90 @@
+<div class="container d-flex justify-content-center mt-5">
+  <form class="w-100" style="max-width: 500px;" [formGroup]="encuestaForm" (ngSubmit)="guardarEncuesta()" novalidate>
+    
+    <!-- Nombre y Apellido -->
+    <div class="mb-3">
+      <label class="form-label">Nombre y Apellido</label>
+      <input type="text" class="form-control" formControlName="nombreApellido">
+      <div class="text-danger" *ngIf="encuestaForm.get('nombreApellido')?.invalid && encuestaForm.get('nombreApellido')?.touched">
+        Campo obligatorio
+      </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="mb-3">
+      <label class="form-label">Edad</label>
+      <input type="number" class="form-control" formControlName="edad">
+      <div class="text-danger" *ngIf="encuestaForm.get('edad')?.invalid && encuestaForm.get('edad')?.touched">
+        Ingrese una edad válida (19 a 98 años)
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="mb-3">
+      <label class="form-label">Teléfono</label>
+      <input type="text" class="form-control" formControlName="telefono" maxlength="10">
+      <div class="text-danger" *ngIf="encuestaForm.get('telefono')?.invalid && encuestaForm.get('telefono')?.touched">
+        Solo números, hasta 10 dígitos
+      </div>
+    </div>
+
+    <!-- Pregunta 1 -->
+    <div class="mb-3">
+      <label class="form-label">¿Qué te pareció la app?</label>
+      <input type="text" class="form-control" formControlName="pregunta1">
+      <div class="text-danger" *ngIf="encuestaForm.get('pregunta1')?.invalid && encuestaForm.get('pregunta1')?.touched">
+        Campo obligatorio
+      </div>
+    </div>
+
+    <!-- Pregunta 2 (Checkboxes) -->
+    <div class="mb-3" formGroupName="pregunta2">
+      <label class="form-label d-block">¿Qué funcionalidades usaste?</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="chat" formControlName="opcion1">
+        <label class="form-check-label" for="chat">Chat</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="juegos" formControlName="opcion2">
+        <label class="form-check-label" for="juegos">Juegos</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="encuestas" formControlName="opcion3">
+        <label class="form-check-label" for="encuestas">Top 5</label>
+      </div>
+      <div class="text-danger" *ngIf="encuestaForm.get('pregunta2')?.invalid && encuestaForm.get('pregunta2')?.touched">
+        Selecciona al menos una opción
+      </div>
+    </div>
+
+    <!-- Pregunta 3 (Radio buttons) -->
+    <div class="mb-3">
+      <label class="form-label d-block">¿Cómo calificarías la app?</label>
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="muyUtil" value="Muy útil" formControlName="pregunta3">
+        <label class="form-check-label" for="muyUtil">Muy útil</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="util" value="Útil" formControlName="pregunta3">
+        <label class="form-check-label" for="util">Útil</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" class="form-check-input" id="pocoUtil" value="Poco útil" formControlName="pregunta3">
+        <label class="form-check-label" for="pocoUtil">Poco útil</label>
+      </div>
+      <div class="text-danger" *ngIf="encuestaForm.get('pregunta3')?.invalid && encuestaForm.get('pregunta3')?.touched">
+        Selecciona una opción
+      </div>
+    </div>
+
+    <!-- Botón de envío -->
+    <button class="btn btn-primary w-100" type="submit" [disabled]="encuestaForm.invalid">
+      Enviar Encuesta
+    </button>
+  </form>
+</div>
+
+<!-- Botón flotante -->
+<button class="boton-flotante" (click)="volverABienvenido()">
+  ⬅ Volver
+</button>

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AdminGuard } from './components/admin.guard';
+import { EncuestasRespuestasComponent } from './components/encuestas-respuestas/encuestas-respuestas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -33,6 +35,21 @@ export const routes: Routes = [
   {
     path: 'juegos',
     loadChildren: () => import('./juegos/juegos.module').then(m => m.JuegosModule)
+  },
+  {
+    path: 'encuestas',
+    loadComponent: () => import('./components/encuestas/encuestas.component')
+    .then((m)=>m.EncuestasComponent),
+  },
+  {
+    path: 'encuestas-respuestas',
+    component: EncuestasRespuestasComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'top-resultados',
+    loadComponent: () => import('./components/top-resultados/top-resultados.component')
+    .then((m)=>m.TopResultadosComponent)
   },
   {
     path: '**',

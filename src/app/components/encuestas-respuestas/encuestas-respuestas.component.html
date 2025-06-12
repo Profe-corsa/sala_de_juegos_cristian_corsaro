@@ -1,0 +1,31 @@
+<div *ngIf="cargando">Cargando encuestas...</div>
+
+<table *ngIf="!cargando && encuestas.length > 0" class="tabla">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Teléfono</th>
+      <th>Pregunta 1</th>
+      <th>Pregunta 2</th>
+      <th>Pregunta 3</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let encuesta of encuestas">
+      <td>{{ encuesta.nombre_apellido }}</td>
+      <td>{{ encuesta.edad }}</td>
+      <td>{{ encuesta.telefono }}</td>
+      <td>{{ encuesta.pregunta_1 }}</td>
+      <td>{{ encuesta.pregunta_2.join(', ') }}</td>
+      <td>{{ encuesta.pregunta_3 }}</td>
+      <td>{{ encuesta.fecha_creacion }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!cargando && encuestas.length === 0">
+  No hay encuestas cargadas.
+</div>
+
